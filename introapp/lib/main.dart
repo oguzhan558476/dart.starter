@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 17, 175, 196),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           title: const Text('Hakkında'),
         ),
@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget> [
-            Text('OĞUZHAN KARAGÜLLE', style: TextStyle(fontSize: 35, color: Colors.white),),
-            Text('Tobeto - Mobil Geliştirici - 1A',style: TextStyle(fontSize: 25,color: Colors.white)),
-            Text('31.10.2023',style: TextStyle(fontSize: 25,color: Colors.white)),
+            Image(image: AssetImage('lib/images/bradpitt.jpg'), width: 200, height: 300,),
+            Text('OĞUZHAN KARAGÜLLE', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600, color: Colors.black),),
+            Text('Tobeto - Mobil Geliştirici - 1A',style: TextStyle(fontSize: 25,color: Colors.black)),
+            Text('31.10.2023',style: TextStyle(fontSize: 25,color: Colors.black)),
             
           ] 
 

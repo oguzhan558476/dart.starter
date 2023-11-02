@@ -1,33 +1,93 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:introapp/models/quiz_question.dart';
+import 'package:introapp/data/questions.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MaterialApp(home: QuestionScreen()));
+}
 
+// Stateless => Ekranda değişime uğramayacak, UI widget
+// CTRL + .
+class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
- 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        appBar: AppBar(
-          title: const Text('Hakkında'),
+    return Scaffold(
+      backgroundColor: Colors.deepPurpleAccent,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/quiz-logo.png", width: 250),
+            const Text(
+              "Quiz App",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold),
+            ),
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_right_alt),
+              label: const Text("Start"),
+              style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.fromLTRB(40, 20, 40, 20)),
+            ),
+          ],
         ),
-        body: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-            Image(image: AssetImage('lib/images/bradpitt.jpg'), width: 200, height: 300,),
-            Text('OĞUZHAN KARAGÜLLE', style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600, color: Colors.black),),
-            Text('Tobeto - Mobil Geliştirici - 1A',style: TextStyle(fontSize: 25,color: Colors.black)),
-            Text('31.10.2023',style: TextStyle(fontSize: 25,color: Colors.black)),
-            
-          ] 
+      ),
+    );
+  }
+}
 
-          )
-        )
+// Boilerplate
+
+class QuestionScreen extends StatefulWidget {
+  const QuestionScreen({Key? key}) : super(key: key);
+
+  @override
+  _QuestionState createState() => _QuestionState();
+}
+
+class _QuestionState extends State<QuestionScreen> {
+
+  int currentQuestionIndex = 0;
+
+  void changeQuestion() {
+    setState(() {
+      if (currentQuestionIndex < questions.length - 1) {
+        
+        currentQuestionIndex++;
+      } else {
+        currentQuestionIndex = 0;
+      }
+      
+    });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+           Text(questions[currentQuestionIndex].question, style: const TextStyle(fontSize: 25), textAlign: TextAlign.center,),
+            ...questions[currentQuestionIndex].answers.map((answer) {
+              return ElevatedButton(
+                onPressed: () {
+                  changeQuestion(); // Düğme tıklandığında bir sonraki soruya geç
+                },
+                child: Text(
+                  answer,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              );
+            })
+        ]),
       ),
     );
   }

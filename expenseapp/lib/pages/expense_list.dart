@@ -1,4 +1,4 @@
-import 'package:expenseapp/models/expense.dart';
+import 'package:expenseapp/data/expenses.dart';
 import 'package:expenseapp/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
@@ -10,20 +10,8 @@ class ExpenseList extends StatefulWidget {
 }
 
 class _ExpenseListState extends State<ExpenseList> {
-  // dummy data
-  final List<Expense> expenses = [
-    Expense(
-        name: "Yiyecek",
-        price: 200.524,
-        date: DateTime.now(),
-        category: Category.food),
-    Expense(
-        name: "Flutter Udemy Course",
-        price: 200,
-        date: DateTime.now(),
-        category: Category.education),
-  ]; // firebase,veritabanı
 
+  // BLoC Pattern
   @override
   Widget build(BuildContext context) {
     return Center(

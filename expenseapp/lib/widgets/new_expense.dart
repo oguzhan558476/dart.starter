@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({Key? key, required this.addExpenseList}) : super(key: key);
-  
-  final Function(Expense) addExpenseList;
+  const NewExpense({Key? key, required this.onAdd}) : super(key: key);
+
+  final void Function(Expense expense) onAdd;
 
   @override
   _NewExpenseState createState() => _NewExpenseState();
@@ -61,48 +61,38 @@ class _NewExpenseState extends State<NewExpense> {
   }
 
   void _addNewExpense() {
-  final amount = double.tryParse(_amountController.text);
-
-  if (amount == null ||
-      amount < 0 ||
-      _nameController.text.isEmpty ||
-      _selectedDate == null) {
-    // Hatalı durum
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return AlertDialog(
-          title: const Text("Validation Error"),
-          content: const Text("Please fill all blank areas."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(ctx);
-              },
-              child: const Text("Okay"),
-            ),
-          ],
-        );
-      },
-    );
-  } else {
-    // Geçerli bir değer
-    final newExpense = Expense(
-      name: _nameController.text,
-      price: amount,
-      date: _selectedDate!,
-      category: _selectedCategory,
-    );
-
-    // Bu yeni harcama öğesini listeye ekleyebilirsiniz.
-    // Örnek olarak bir harcama listesi tuttuğunuzu varsayalım.
-    // expensesList.add(newExpense);
-    widget.addExpenseList(newExpense);
-
-    // Ekleme işlemi bittikten sonra ekrandan çıkabilirsiniz.
-    Navigator.pop(context);
+    final amount = double.tryParse(_amountController.text);
+    // parse, tryParse => parse değer nullsa hata fırlatır, tryParse değeri null olarak alır
+    if (amount == null ||
+        amount < 0 ||
+        _nameController.text.isEmpty ||
+        _selectedDate == null) {
+      /// hatalı durum
+      showDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              title: const Text("Validation Error"),
+              content: const Text("Please fill all blank areas."),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(ctx);
+                    },
+                    child: const Text("Okay"))
+              ],
+            );
+          });
+    } else {
+      Expense expense = Expense(
+          name: _nameController.text,
+          price: amount,
+          date: _selectedDate!,
+          category: _selectedCategory);
+      widget.onAdd(expense);
+      Navigator.pop(context);
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {

@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    appBarTheme: const AppBarTheme().copyWith(
-        backgroundColor: Colors.grey,
-        foregroundColor: Colors.amber),
-    cardTheme: const CardTheme().copyWith(
-        color: Colors.amber,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF39A7FF),
+      foregroundColor: Color.fromARGB(255, 0, 0, 0),
+    ),
+    cardTheme: const CardTheme(
+      color: Color(0xFF39A7FF), // Özel renk kodunu burada kullandık
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      shadowColor: Colors.transparent,
+    ),
     textTheme: ThemeData().textTheme.copyWith(
           titleLarge: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 16
+              fontSize: 18
           ),
     ),
   );
@@ -23,15 +26,15 @@ class AppTheme {
    useMaterial3: true,
     appBarTheme: const AppBarTheme().copyWith(
         backgroundColor: Colors.grey,
-        foregroundColor: Colors.amber),
+        foregroundColor: const Color.fromARGB(255, 7, 247, 255)),
     cardTheme: const CardTheme().copyWith(
-        color: Colors.amber,
+        color: const Color.fromARGB(255, 7, 255, 234),
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
     textTheme: ThemeData().textTheme.copyWith(
           titleLarge: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: 16
+              fontSize: 18
           ),
           
         ),

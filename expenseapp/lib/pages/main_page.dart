@@ -13,15 +13,17 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final List<Expense> expenses = [
     Expense(
-        name: "Yiyecek",
-        price: 200.524,
-        date: DateTime.now(),
-        category: Category.food),
+      name: "Yiyecek",
+      price: 200.524,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
     Expense(
-        name: "Flutter Udemy Course",
-        price: 200,
-        date: DateTime.now(),
-        category: Category.education),
+      name: "Flutter Udemy Course",
+      price: 200,
+      date: DateTime.now(),
+      category: Category.education,
+    ),
   ];
 
   void addExpense(Expense expense) {
@@ -31,6 +33,17 @@ class _MainPageState extends State<MainPage> {
   }
 
   void removeExpense(Expense expense) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Expense removed'),
+        action: SnackBarAction(
+          label: 'UNDO',
+          onPressed: () {
+            undoRemove(expense);
+          },
+        ),
+      ),
+    );
     setState(() {
       expenses.remove(expense);
     });
@@ -46,20 +59,23 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expense App"),
+        title: const Text("Expense App", style: TextStyle(fontSize: 22)),
         actions: [
           IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (ctx) => NewExpense(
-                          onAdd: (expense) => addExpense(expense),
-                        ));
-              },
-              icon: const Icon(Icons.add)),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (ctx) => NewExpense(
+                  onAdd: (expense) => addExpense(expense),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: ExpenseList(expenses, removeExpense, undoRemove),
     );
   }
 }
+

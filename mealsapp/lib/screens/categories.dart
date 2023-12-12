@@ -46,7 +46,7 @@ class Categories extends StatelessWidget {
             DrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                image: DecorationImage(image: AssetImage("lib/images/mercimek.jpg"),
+                image: const DecorationImage(image: AssetImage("lib/images/mercimek.jpg"),
                 
                 fit: BoxFit.cover, ), 
               ),

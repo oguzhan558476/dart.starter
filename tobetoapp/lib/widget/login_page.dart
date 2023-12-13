@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:tobeto_app/widget/register_page.dart'; 
+import 'package:tobeto_app/widget/forgotpassword_page.dart'; 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -75,11 +76,15 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(right: 18.0),
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                          );
+                        },
                         child: const Text(
                           'Şifremi Unuttum',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 80, 79, 79)),
+                          style: TextStyle(color: Color.fromARGB(255, 80, 79, 79)),
                         ),
                       ),
                     ),
@@ -101,13 +106,18 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                      );
+                    },
                     child: const Text(
                       'Hala üye değil misiniz? Kayıt Ol',
                       style: TextStyle(color: Color(0xFF828282)),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

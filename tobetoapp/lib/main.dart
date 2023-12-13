@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:tobetoapp/pages/login_page.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:tobeto_app/widget/login_page.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // Renklerin tanımlanması
-  final Color primaryColor = Color(0xFF9833FF); // Tobeto primary rengi
-  final Color backgroundColor = Color(0xFFFFFFFF); // Tobeto background rengi
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TobetoApp',
-      theme: ThemeData(
-        primaryColor: primaryColor,
-        scaffoldBackgroundColor: backgroundColor,
-        // Diğer temel özellikler burada tanımlanabilir
+  runApp(
+    MaterialApp(
+      theme: ThemeData.from(
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFF9833FF),
+          background: Color(0xFFFFFFFF),
+          surface: Color(0xFFFFFFFF),
+          onPrimary: Color(0xFFFFFFFF),
+          onSecondary: Color(0xFF000000), // Burada eksik olan onSecondary'yi ekliyoruz
+          secondary: Color(0xFF515151),
+          error: Color(0xFFFE4657),
+          onError: Color(0xFFFE4657),
+          onSurface: Color(0xFF9833FF),
+          onBackground: Color(0xFF000000),
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(), // Poppins font ailesini kullanmak için
       ),
-      home: LoginPage(), // Uygulama başladığında gösterilecek sayfa
-    );
-  }
+      debugShowCheckedModeBanner: false,
+      home: const LoginPage(),
+    ),
+  );
 }

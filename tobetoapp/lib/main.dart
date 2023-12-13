@@ -8,19 +8,19 @@ void main() {
     MaterialApp(
       theme: ThemeData.from(
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFF9833FF),
-          background: Color(0xFFFFFFFF),
-          surface: Color(0xFFFFFFFF),
-          onPrimary: Color(0xFFFFFFFF),
-          onSecondary: Color(0xFF000000), // Burada eksik olan onSecondary'yi ekliyoruz
-          secondary: Color(0xFF515151),
-          error: Color(0xFFFE4657),
-          onError: Color(0xFFFE4657),
-          onSurface: Color(0xFF9833FF),
-          onBackground: Color(0xFF000000),
-        ),
+          primary: Color(0xFF9833FF), // Ana renk
+          background: Color(0xFFFFFFFF), // Arkaplan rengi
+          surface: Color(0xFFFFFFFF), // Yüzey rengi
+          onPrimary: Color(0xFFFFFFFF), // Ana renk üzerindeki metin rengi
+          onSecondary: Color(0xFF000000), // İkincil renk üzerindeki metin rengi
+          secondary: Color(0xFF515151), // İkincil renk
+          error: Color(0xFFFE4657), // Hata rengi
+          onError: Color(0xFFFE4657), // Hata üzerindeki metin rengi
+          onSurface: Color(0xFF9833FF), // Yüzey üzerindeki metin rengi
+          onBackground: Color(0xFF000000), // Arkaplan üzerindeki metin rengi
+          ),
         textTheme: GoogleFonts.poppinsTextTheme(), // Poppins font ailesini kullanmak için
-      ),
+        ),
       debugShowCheckedModeBanner: false,
       home: const LoginPage(),
     ),

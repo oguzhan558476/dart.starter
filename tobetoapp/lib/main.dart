@@ -1,7 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tobeto_app/widget/login_page.dart';
-
 class MainLayout extends StatefulWidget {
   final Widget child;
   const MainLayout({Key? key, required this.child}) : super(key: key);
@@ -14,86 +15,6 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(    
-      appBar: AppBar(
-        title: const Text('Ana Sayfa'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 252, 252, 252),
-              ),
-              child: Row(
-                children: [
-                  Image.asset('assets/images/tobeto-logo.png', width: 150, height: 150),
-                  const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 40),
-            ListTile(
-              title: const Text('Ana Sayfa'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Değerlendirmeler'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Profilim'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Katalog'),
-              onTap: () {
-                Navigator.pop(context); 
-              },
-            ),
-            ListTile(
-              title: const Text('Takvim'),
-              onTap: () {
-                Navigator.pop(context); 
-              },
-            ),
-            ListTile(
-              title: const Row(               
-                children: [
-                  Text(
-                    'Tobeto',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(width: 2), 
-                  Icon(Icons.home),
-                ],
-              ),
-              onTap: () {
-                Navigator.pop(context); 
-              },
-            ),
-            const SizedBox(height: 100), 
-            ListTile(
-              title: const Text('Kullanıcı Adı ve Soyadı'), 
-              onTap: () {               
-                Navigator.pop(context);
-              },
-            ),
-
-          ],
-        ),
-      ),
       body: widget.child,
     );
   }
@@ -102,10 +23,24 @@ class _MainLayoutState extends State<MainLayout> {
 void main() {
   runApp(
     MaterialApp(
-      theme: ThemeData.from(
-        colorScheme: const ColorScheme.light(),
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
+      theme: ThemeData(
+  colorScheme: const ColorScheme.light(),
+  textTheme: const TextTheme(
+    headline1: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+    headline6: TextStyle(fontSize: 25, fontStyle: FontStyle.italic),
+    // Diğer metin stilleri...headline2: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          headline3: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          headline4: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          headline5: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+          subtitle1: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+          subtitle2: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+          bodyText1: TextStyle(fontSize: 16),
+          bodyText2: TextStyle(fontSize: 14),
+          button: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          caption: TextStyle(fontSize: 12),
+          overline: TextStyle(fontSize: 10),
+  ),
+),
       darkTheme: ThemeData.from(colorScheme: const ColorScheme.dark()),
       debugShowCheckedModeBanner: false,
       home: const MainLayout(

@@ -33,41 +33,56 @@ class _QuestionState extends State<QuestionScreen> {
     answersIndex.add(index);
     changeQuestion();
   }
-
   // Spread Operator
   @override
   Widget build(BuildContext context) {
     final currentQuestion = questions[
-        currentQuestionIndex]; // Liste içerisinden o an kaçıncı soruda isek
-    // o indexdeki veriyi al.
-
+        currentQuestionIndex];
     return Scaffold(
-  body: Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(currentQuestion.question),
-              ...currentQuestion.answers.map((answer) {
-                return ElevatedButton(
-                  child: Text(answer),
-                  onPressed: () {
-                    saveAnswer(questions[currentQuestionIndex].answers.indexOf(answer));
-                  },
-                );
-              }),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(currentQuestion.question),
+                  if (MediaQuery.of(context).orientation == Orientation.landscape)
+                    GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2, // Yatay konum için iki sütunlu GridView
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 10.0,
+                      childAspectRatio: (MediaQuery.of(context).size.width / 2) / 50,
+                      children: currentQuestion.answers.map((answer) {
+                        return ElevatedButton(
+                          child: Text(answer),
+                          onPressed: () {
+                            saveAnswer(questions[currentQuestionIndex].answers.indexOf(answer));
+                          },
+                        );
+                      }).toList(),
+                    )
+                  else
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch, // Dikey konum için genişletmek gerekebilir
+                      children: currentQuestion.answers.map((answer) {
+                        return ElevatedButton(
+                          child: Text(answer),
+                          onPressed: () {
+                            saveAnswer(questions[currentQuestionIndex].answers.indexOf(answer));
+                          },
+                        );
+                      }).toList(),
+                    ),
+                ],
+              ),
+            ),
+          ],
         ),
-      
-      ],
-    ),
-  ),
-);
-
+      ),
+    );
   }
 }

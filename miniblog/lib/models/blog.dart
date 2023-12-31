@@ -26,4 +26,5 @@ class Blog {
     data['author'] = this.author;
     return data;
   }
+  
 }

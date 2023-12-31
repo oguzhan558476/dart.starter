@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import "package:http/http.dart" as http;
+import 'package:miniblog/blocs/article_bloc/article_bloc.dart';
+import 'package:miniblog/blocs/article_bloc/article_event.dart';
 
 class AddBlog extends StatefulWidget {
   const AddBlog({super.key});
@@ -25,26 +26,6 @@ class _AddBlogState extends State<AddBlog> {
     setState(() {
       selectedImage = selectedFile;
     });
-  }
-
-  submitForm() async {
-    Uri url = Uri.parse("https://tobetoapi.halitkalayci.com/api/Articles");
-    var request = http.MultipartRequest("POST", url);
-
-    if (selectedImage != null) {
-      request.files
-          .add(await http.MultipartFile.fromPath("File", selectedImage!.path));
-    }
-
-    request.fields['Title'] = title;
-    request.fields['Content'] = content;
-    request.fields['Author'] = author;
-
-    final response = await request.send();
-
-    if (response.statusCode == 201) {
-      Navigator.pop(context, true);
-    }
   }
 
   @override
@@ -107,7 +88,14 @@ class _AddBlogState extends State<AddBlog> {
                         }
                         // Validasyonlar başarılı
                         _formKey.currentState!.save();
-                        submitForm();
+                        context.read<ArticleBloc>().add(AddArticle(
+                            title: title,
+                            content: content,
+                            imagePath: selectedImage!.path,
+                            author: author
+                            )
+                        );
+                        Navigator.pop(context, true);
                       }
                     },
                     child: const Text("Gönder"))

@@ -16,7 +16,7 @@ class BlogItem extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BlogDetail(blogId: blog.id ?? ''),
+              builder: (context) => DetailPage(id: blog.id ?? ''),
             ),
           );
         },
